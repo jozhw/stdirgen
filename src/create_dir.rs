@@ -7,11 +7,11 @@ use crate::errors::create_error::CreateError;
 // need name, path, iter, start
 pub fn create_dir(
     name: &str,
-    path: PathBuf,
+    path: &PathBuf,
     iter: &i32,
     start: &i32,
 ) -> Result<(), Box<dyn Error>> {
-    let end = iter + start + 1;
+    let end = iter + start;
 
     for i in *start..end {
         let owned_name: String = name.to_string();
@@ -20,7 +20,7 @@ pub fn create_dir(
 
         let mut complete_path = PathBuf::new();
         // push the original path not including dir_name
-        complete_path.push(&path);
+        complete_path.push(path);
         // push the dir_name
         complete_path.push(&dir_name);
 
@@ -47,7 +47,7 @@ mod tests {
         let iter = 2;
         let start = 1;
 
-        let result = create_dir(name, path.clone(), &iter, &start);
+        let result = create_dir(name, &path, &iter, &start);
 
         assert!(result.is_ok(), "Failed to create directories {:?}", result);
 
