@@ -2,6 +2,7 @@
 pub mod cli;
 pub mod create_dir;
 pub mod create_file;
+pub mod create_subfiles;
 
 // structs
 pub use cli::Cli;
