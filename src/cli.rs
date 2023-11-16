@@ -1,3 +1,5 @@
+// To Do:: Add Error handeling for methods
+
 use std::env;
 use std::path::PathBuf;
 
@@ -121,7 +123,7 @@ pub struct SubfileCommands<'a> {
     files_start: &'a Vec<i32>,
 }
 
-#[derive(Debug, Args)]
+#[derive(Debug, Args, Clone)]
 pub struct FileCommand {
     /// Name of file, enumeration will be appended at the end of the name. Note: Currently only
     /// allows for one delimiter "."
@@ -144,10 +146,207 @@ pub struct FileCommand {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
     use crate::Cli;
+
     #[test]
     fn verify_cli() {
         use clap::CommandFactory;
         Cli::command().debug_assert()
+    }
+    #[test]
+    fn test_get_name_directory() {
+        let args = DirectoryCommand {
+            name: "test_directory".to_string(),
+            path: Some(PathBuf::from("/test/path")),
+            iter: 10,
+            start: 5,
+            files: Some(vec!["file1".to_string(), "file2".to_string()]),
+            files_iter: vec![1, 2, 3],
+            files_start: vec![10, 20, 30],
+        };
+
+        let entity_type = EntityType::Directory(args.clone());
+
+        assert_eq!(entity_type.get_name(), &args.name);
+    }
+
+    #[test]
+    fn test_get_path_directory() {
+        let args = DirectoryCommand {
+            name: "test_directory".to_string(),
+            path: Some(PathBuf::from("/test/path")),
+            iter: 10,
+            start: 5,
+            files: Some(vec!["file1".to_string(), "file2".to_string()]),
+            files_iter: vec![1, 2, 3],
+            files_start: vec![10, 20, 30],
+        };
+
+        let entity_type = EntityType::Directory(args.clone());
+
+        assert_eq!(entity_type.get_path(), args.path.unwrap());
+    }
+
+    #[test]
+    fn test_get_iter_directory() {
+        let args = DirectoryCommand {
+            name: "test_directory".to_string(),
+            path: Some(PathBuf::from("/test/path")),
+            iter: 10,
+            start: 5,
+            files: Some(vec!["file1".to_string(), "file2".to_string()]),
+            files_iter: vec![1, 2, 3],
+            files_start: vec![10, 20, 30],
+        };
+
+        let entity_type = EntityType::Directory(args.clone());
+
+        assert_eq!(entity_type.get_iter(), &args.iter);
+    }
+
+    #[test]
+    fn test_get_start_directory() {
+        let args = DirectoryCommand {
+            name: "test_directory".to_string(),
+            path: Some(PathBuf::from("/test/path")),
+            iter: 10,
+            start: 5,
+            files: Some(vec!["file1".to_string(), "file2".to_string()]),
+            files_iter: vec![1, 2, 3],
+            files_start: vec![10, 20, 30],
+        };
+
+        let entity_type = EntityType::Directory(args.clone());
+
+        assert_eq!(entity_type.get_start(), &args.start);
+    }
+
+    #[test]
+    fn test_get_subfile_commands_with_files() {
+        // make sure that the FileCommand fails since this method is only for the DirectoryCommand
+
+        let directory_args = DirectoryCommand {
+            name: "test_directory".to_string(),
+            path: Some(PathBuf::from("/test/path")),
+            iter: 10,
+            start: 5,
+            files: Some(vec!["file1".to_string(), "file2".to_string()]),
+            files_iter: vec![1, 2, 3],
+            files_start: vec![10, 20, 30],
+        };
+        // create a test case subfile_args for correct object to be tested against
+        let test_subfile_commands = SubfileCommands {
+            files: &directory_args.files,
+            files_iter: &directory_args.files_iter,
+            files_start: &directory_args.files_start,
+        };
+
+        let entity_type = EntityType::Directory(directory_args.clone());
+
+        if let Some(subfile_commands) = entity_type.get_subfile_commands() {
+            assert_eq!(subfile_commands.files, test_subfile_commands.files);
+            assert_eq!(
+                subfile_commands.files_iter,
+                test_subfile_commands.files_iter
+            );
+            assert_eq!(
+                subfile_commands.files_start,
+                test_subfile_commands.files_start
+            )
+        } else {
+            panic!("Expected Some(subfile_commands), but got None")
+        }
+    }
+
+    #[test]
+    fn test_get_subfile_commands_without_files() {
+        let directory_args = DirectoryCommand {
+            name: "test_directory".to_string(),
+            path: Some(PathBuf::from("/test/path")),
+            iter: 10,
+            start: 5,
+            files: None,
+            files_iter: vec![1, 2, 3],
+            files_start: vec![10, 20, 30],
+        };
+
+        let entity_type = EntityType::Directory(directory_args.clone());
+
+        if let None = entity_type.get_subfile_commands() {
+            assert!(true)
+        } else {
+            panic!("Expected None value, but got a Some(SubfileCommands) value")
+        }
+    }
+
+    #[test]
+    fn test_get_subfile_commands_files_command() {
+        let file_args = FileCommand {
+            name: "test_directory".to_string(),
+            path: Some(PathBuf::from("/test/path")),
+            iter: 10,
+            start: 5,
+        };
+
+        let entity_type = EntityType::File(file_args.clone());
+
+        if let None = entity_type.get_subfile_commands() {
+            assert!(true)
+        } else {
+            panic!("Expected None value, but got a Some(SubfileCommands) value")
+        }
+    }
+
+    #[test]
+    fn test_get_name_file() {
+        let args = FileCommand {
+            name: "test_directory".to_string(),
+            path: Some(PathBuf::from("/test/path")),
+            iter: 10,
+            start: 5,
+        };
+
+        let entity_type = EntityType::File(args.clone());
+        assert_eq!(entity_type.get_name(), &args.name)
+    }
+
+    #[test]
+    fn test_get_path_file() {
+        let args = FileCommand {
+            name: "test_directory".to_string(),
+            path: Some(PathBuf::from("/test/path")),
+            iter: 10,
+            start: 5,
+        };
+
+        let entity_type = EntityType::File(args.clone());
+        assert_eq!(entity_type.get_path(), args.path.unwrap())
+    }
+
+    #[test]
+    fn test_get_iter_file() {
+        let args = FileCommand {
+            name: "test_directory".to_string(),
+            path: Some(PathBuf::from("/test/path")),
+            iter: 10,
+            start: 5,
+        };
+
+        let entity_type = EntityType::File(args.clone());
+        assert_eq!(entity_type.get_iter(), &args.iter)
+    }
+
+    #[test]
+    fn test_get_start_file() {
+        let args = FileCommand {
+            name: "test_directory".to_string(),
+            path: Some(PathBuf::from("/test/path")),
+            iter: 10,
+            start: 5,
+        };
+
+        let entity_type = EntityType::File(args.clone());
+        assert_eq!(entity_type.get_start(), &args.start)
     }
 }
