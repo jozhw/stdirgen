@@ -99,14 +99,16 @@ impl DirectoryCommand {
     /* the return SubfileCommands type contains a reference the values from the inital parsing */
     fn get_subfile_commands(&self) -> Option<SubfileCommands> {
         // check to see if subfile commands exist with files since files_iter and files_start depend on files
-        if let None = &self.files {
+
+        if let Some(subfile_commands) = &self.files {
+            Some(SubfileCommands {
+                files: &subfile_commands,
+                files_iter: &self.files_iter,
+                files_start: &self.files_start,
+            })
+        } else {
             return None;
         }
-        Some(SubfileCommands {
-            files: &self.files,
-            files_iter: &self.files_iter,
-            files_start: &self.files_start,
-        })
     }
 }
 
@@ -118,7 +120,7 @@ impl DirectoryCommand {
 
 #[derive(Debug)]
 pub struct SubfileCommands<'a> {
-    files: &'a Option<Vec<String>>,
+    files: &'a Vec<String>,
     files_iter: &'a Vec<i32>,
     files_start: &'a Vec<i32>,
 }
@@ -235,25 +237,13 @@ mod tests {
             files_iter: vec![1, 2, 3],
             files_start: vec![10, 20, 30],
         };
-        // create a test case subfile_args for correct object to be tested against
-        let test_subfile_commands = SubfileCommands {
-            files: &directory_args.files,
-            files_iter: &directory_args.files_iter,
-            files_start: &directory_args.files_start,
-        };
 
         let entity_type = EntityType::Directory(directory_args.clone());
 
         if let Some(subfile_commands) = entity_type.get_subfile_commands() {
-            assert_eq!(subfile_commands.files, test_subfile_commands.files);
-            assert_eq!(
-                subfile_commands.files_iter,
-                test_subfile_commands.files_iter
-            );
-            assert_eq!(
-                subfile_commands.files_start,
-                test_subfile_commands.files_start
-            )
+            assert_eq!(subfile_commands.files, &directory_args.files.unwrap());
+            assert_eq!(subfile_commands.files_iter, &directory_args.files_iter);
+            assert_eq!(subfile_commands.files_start, &directory_args.files_start)
         } else {
             panic!("Expected Some(subfile_commands), but got None")
         }
