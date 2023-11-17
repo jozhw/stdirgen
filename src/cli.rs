@@ -76,6 +76,16 @@ impl EntityType {
     }
     // get the subfile commands for the Directory struct, but for File struct the object does not
     // exist
+    //
+    /// Get all of the subfile commands that is only valid for the DirectoryCommands.
+    ///
+    /// # Note
+    /// The program will panic if the vector length for file name, iter, and start are not the
+    /// same.
+    ///
+    /// # Return
+    ///
+    /// Option<SubfileCommands> with SubfileCommands containing vector references.
     fn get_subfile_commands(&self) -> Option<SubfileCommands> {
         match self {
             /* Could this be a point of error? Since the returned object is not a reference?
@@ -121,10 +131,24 @@ pub struct DirectoryCommand {
 
 impl DirectoryCommand {
     /* the return SubfileCommands type contains a reference the values from the inital parsing */
+
+    /// Gets the subfile commands
+    ///
+    /// # Returns
+    ///
+    /// Option<SubfileCommands>, because subfile commands are optional
     fn get_subfile_commands(&self) -> Option<SubfileCommands> {
         // check to see if subfile commands exist with files since files_iter and files_start depend on files
 
         if let Some(subfile_commands) = &self.files {
+            // all of the values have to have the same length in order to match the commands
+            if &subfile_commands.len() != &self.files_iter.len()
+                || &subfile_commands.len() != &self.files_start.len()
+                || &self.files_iter.len() != &self.files_start.len()
+            {
+                panic!("The length of files, files_iter, files_start are not equal!")
+            }
+
             Some(SubfileCommands {
                 files: &subfile_commands,
                 files_iter: &self.files_iter,
