@@ -5,11 +5,24 @@ use std::path::PathBuf;
 use crate::errors::create_error::CreateError;
 use crate::utils::split_string::{split_string, SplitResult};
 
-// need name, path, iter, start
+/// create_subfiles creates subfiles from a list of file names that are enumerated within a particular directory
+///
+/// # Arguments
+///
+/// * 'files' - A vector of file names to create that must contain the delimiter ".".
+/// * 'files_iter' - A vector of iterations for the respective file.
+/// * 'files_start' - A vector of when the enumeration should start.
+/// * 'path' - The path to the directory the file will reside in. Note: the directory must be
+/// included.
+///
+/// # Returns
+///
+/// Result type.
 pub fn create_subfiles(
     files: &Vec<String>,
     files_iter: &Vec<i32>,
     files_start: &Vec<i32>,
+    // path must contain the dir the file will reside in
     path: &PathBuf,
 ) -> Result<(), Box<dyn Error>> {
     // will come back to optimize, but for the current build
