@@ -120,8 +120,9 @@ mod tests {
 
             // remove test files
             for j in start..end {
-                let file_name = format!("{}{}{}{}", file_name, j, delimiter, file_extension);
-                let mut complete_path = path.clone();
+                let file_name: String =
+                    format!("{}{}{}{}", file_name, j, delimiter, file_extension);
+                let mut complete_path: PathBuf = path.clone();
                 complete_path.push(file_name);
 
                 let _ = std::fs::remove_file(&complete_path);
