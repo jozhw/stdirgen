@@ -20,8 +20,8 @@ use crate::utils::split_string::{split_string, SplitResult};
 /// Result type.
 pub fn create_subfiles(
     files: &Vec<String>,
-    files_iter: &Vec<i32>,
-    files_start: &Vec<i32>,
+    files_iter: &[i32],
+    files_start: &[i32],
     // path must contain the dir the file will reside in
     path: &PathBuf,
 ) -> Result<(), Box<dyn Error>> {
@@ -34,7 +34,7 @@ pub fn create_subfiles(
         let name: &String = &files[i];
         let iter: i32 = files_iter[i];
         let start: i32 = files_start[i];
-        let end: i32 = &iter + &start;
+        let end: i32 = iter + start;
         let result: SplitResult<'_> = split_string(name, delimiter);
 
         match result {

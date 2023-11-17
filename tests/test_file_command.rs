@@ -11,7 +11,7 @@ fn test_file_command_without_path() {
     let assert = Command::cargo_bin("stdirgen")
         .expect("Failed to find binary")
         .current_dir(temp_dir.path())
-        .args(&[
+        .args([
             "file",
             "--name",
             "test_file.txt",
@@ -54,7 +54,7 @@ fn test_file_command_with_path() {
 
     let assert = Command::cargo_bin("stdirgen")
         .expect("Failed to find binary")
-        .args(&[
+        .args([
             "file",
             "--name",
             "test_file.txt",

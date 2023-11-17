@@ -142,20 +142,20 @@ impl DirectoryCommand {
 
         if let Some(subfile_commands) = &self.files {
             // all of the values have to have the same length in order to match the commands
-            if &subfile_commands.len() != &self.files_iter.len()
-                || &subfile_commands.len() != &self.files_start.len()
-                || &self.files_iter.len() != &self.files_start.len()
+            if subfile_commands.len() != self.files_iter.len()
+                || subfile_commands.len() != self.files_start.len()
+                || self.files_iter.len() != self.files_start.len()
             {
                 panic!("The length of files, files_iter, files_start are not equal!")
             }
 
             Some(SubfileCommands {
-                files: &subfile_commands,
+                files: subfile_commands,
                 files_iter: &self.files_iter,
                 files_start: &self.files_start,
             })
         } else {
-            return None;
+            None
         }
     }
 }
@@ -315,7 +315,7 @@ mod tests {
 
         let entity_type = EntityType::Directory(directory_args.clone());
 
-        if let None = entity_type.get_subfile_commands() {
+        if entity_type.get_subfile_commands().is_none() {
             assert!(true)
         } else {
             panic!("Expected None value, but got a Some(SubfileCommands) value")
@@ -333,7 +333,7 @@ mod tests {
 
         let entity_type = EntityType::File(file_args.clone());
 
-        if let None = entity_type.get_subfile_commands() {
+        if entity_type.get_subfile_commands().is_none() {
             assert!(true)
         } else {
             panic!("Expected None value, but got a Some(SubfileCommands) value")

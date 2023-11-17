@@ -17,23 +17,20 @@ fn main() {
                 entity_type.get_subfile_commands();
 
             let enumer_dirs: Vec<String> =
-                create_dir::create_dir(dir_name, &path, &dir_iter, &dir_start).unwrap();
+                create_dir::create_dir(dir_name, &path, dir_iter, dir_start).unwrap();
 
-            match subfile_commands {
-                Some(command) => {
-                    let files: &Vec<String> = command.files;
-                    let files_iter: &Vec<i32> = command.files_iter;
-                    let files_start: &Vec<i32> = command.files_start;
+            if let Some(command) = subfile_commands {
+                let files: &Vec<String> = command.files;
+                let files_iter: &Vec<i32> = command.files_iter;
+                let files_start: &Vec<i32> = command.files_start;
 
-                    for directory in enumer_dirs {
-                        let mut dir_path = path.clone();
-                        dir_path.push(directory);
+                for directory in enumer_dirs {
+                    let mut dir_path = path.clone();
+                    dir_path.push(directory);
 
-                        create_subfiles::create_subfiles(files, files_iter, files_start, &dir_path)
-                            .unwrap();
-                    }
+                    create_subfiles::create_subfiles(files, files_iter, files_start, &dir_path)
+                        .unwrap();
                 }
-                None => {}
             }
 
             println!("The values of directory command is {:?}", dir_name)
