@@ -85,7 +85,7 @@ impl EntityType {
     ///
     /// # Return
     ///
-    /// Option<SubfileCommands> with SubfileCommands containing vector references.
+    /// Option with SubfileCommands containing vector references.
     pub fn get_subfile_commands(&self) -> Option<SubfileCommands> {
         match self {
             /* Could this be a point of error? Since the returned object is not a reference?
