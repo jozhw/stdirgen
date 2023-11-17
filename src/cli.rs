@@ -23,7 +23,7 @@ impl EntityType {
     /// # Returns
     ///
     /// A string reference (&str) to the argument name input.
-    fn get_name(&self) -> &str {
+    pub fn get_name(&self) -> &str {
         match self {
             Self::Directory(args) => &args.name,
             Self::File(args) => &args.name,
@@ -42,7 +42,7 @@ impl EntityType {
     /// # Returns
     ///
     /// A PathBuf type of the path of the directory that the creation will occur in.
-    fn get_path(&self) -> PathBuf {
+    pub fn get_path(&self) -> PathBuf {
         let current_dir = env::current_dir().expect("Failed to find current directory");
         // control for a None object; if none then will use current dir
         match self {
@@ -56,7 +56,7 @@ impl EntityType {
     /// # Returns
     ///
     /// A i32 reference.
-    fn get_iter(&self) -> &i32 {
+    pub fn get_iter(&self) -> &i32 {
         match self {
             Self::Directory(args) => &args.iter,
             Self::File(args) => &args.iter,
@@ -68,7 +68,7 @@ impl EntityType {
     /// # Returns
     ///
     /// A i32 reference.
-    fn get_start(&self) -> &i32 {
+    pub fn get_start(&self) -> &i32 {
         match self {
             Self::Directory(args) => &args.start,
             Self::File(args) => &args.start,
@@ -86,7 +86,7 @@ impl EntityType {
     /// # Return
     ///
     /// Option<SubfileCommands> with SubfileCommands containing vector references.
-    fn get_subfile_commands(&self) -> Option<SubfileCommands> {
+    pub fn get_subfile_commands(&self) -> Option<SubfileCommands> {
         match self {
             /* Could this be a point of error? Since the returned object is not a reference?
              * However, within the object are objects that are references */
