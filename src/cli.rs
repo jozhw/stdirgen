@@ -81,7 +81,7 @@ pub struct DirectoryCommand {
     #[arg(short, long, default_value_t = 1)]
     pub start: i32,
 
-    /// Optional: Creates files within each directory created. Note: Currently only allows for one
+    /// Optional: Creates files within each directory created. Note: Requires the delimiter "." and currently only allows for one
     /// delimiter "."
     #[arg(short, long, requires = "files_iter")]
     pub files: Option<Vec<String>>,
@@ -127,8 +127,8 @@ pub struct SubfileCommands<'a> {
 
 #[derive(Debug, Args, Clone)]
 pub struct FileCommand {
-    /// Name of file, enumeration will be appended at the end of the name. Note: Currently only
-    /// allows for one delimiter "."
+    /// Name of file, enumeration will be appended at the end of the name. Note: Must contain the
+    /// delimiter "." currently only allows for one delimiter "."
     #[arg(short, long)]
     pub name: String,
 
