@@ -168,9 +168,9 @@ impl DirectoryCommand {
 
 #[derive(Debug)]
 pub struct SubfileCommands<'a> {
-    files: &'a Vec<String>,
-    files_iter: &'a Vec<i32>,
-    files_start: &'a Vec<i32>,
+    pub files: &'a Vec<String>,
+    pub files_iter: &'a Vec<i32>,
+    pub files_start: &'a Vec<i32>,
 }
 
 #[derive(Debug, Args, Clone)]
