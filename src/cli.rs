@@ -1,5 +1,4 @@
-// To Do:: Add Error handeling for methods
-
+/// To Do:: Add Error handeling for methods
 use std::env;
 use std::path::PathBuf;
 
@@ -19,6 +18,11 @@ pub enum EntityType {
 }
 
 impl EntityType {
+    /// The function gets the name input for either the Directory of File commands.
+    ///
+    /// # Returns
+    ///
+    /// A string reference (&str) to the argument name input.
     fn get_name(&self) -> &str {
         match self {
             Self::Directory(args) => &args.name,
@@ -28,6 +32,16 @@ impl EntityType {
 
     // could not get it to return a reference to PathBuf, had to create a new instance of because
     // of the temporary error
+    //
+    /// The function gets the path that the creation of name will be in.
+    ///
+    /// # Notes
+    ///
+    /// If a directory path is not provided, it will use the current directory.
+    ///
+    /// # Returns
+    ///
+    /// A PathBuf type of the path of the directory that the creation will occur in.
     fn get_path(&self) -> PathBuf {
         let current_dir = env::current_dir().expect("Failed to find current directory");
         // control for a None object; if none then will use current dir
@@ -37,6 +51,11 @@ impl EntityType {
             Self::File(args) => args.path.clone().unwrap_or(current_dir),
         }
     }
+    /// Gets the amount of times the file or directory will be enumerated
+    ///
+    /// # Returns
+    ///
+    /// A i32 reference.
     fn get_iter(&self) -> &i32 {
         match self {
             Self::Directory(args) => &args.iter,
@@ -44,6 +63,11 @@ impl EntityType {
         }
     }
 
+    /// Gets the start enumeration of the file or directory will be enumerated
+    ///
+    /// # Returns
+    ///
+    /// A i32 reference.
     fn get_start(&self) -> &i32 {
         match self {
             Self::Directory(args) => &args.start,
