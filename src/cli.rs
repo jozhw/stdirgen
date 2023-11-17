@@ -281,7 +281,11 @@ mod tests {
             path: Some(PathBuf::from("/test/path")),
             iter: 10,
             start: 5,
-            files: Some(vec!["file1".to_string(), "file2".to_string()]),
+            files: Some(vec![
+                "file1".to_string(),
+                "file2".to_string(),
+                "file3".to_string(),
+            ]),
             files_iter: vec![1, 2, 3],
             files_start: vec![10, 20, 30],
         };
