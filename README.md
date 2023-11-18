@@ -2,10 +2,12 @@
 
 # Stdirgen - CLI File/Directory Generation
 
-<a href="https://www.rust-lang.org/learn"> ![Static Badge](https://img.shields.io/badge/rust_1.70%2B-orange?style=for-the-badge)
-</a>
-![Codecov](https://img.shields.io/codecov/c/github/jozhw/stdirgen?style=for-the-badge)
+<a href="https://www.rust-lang.org/learn">![Static Badge](https://img.shields.io/badge/language-rust_1.7%2B-orange?style=for-the-badge)</a>
+![Codecov branch](https://img.shields.io/codecov/c/github/jozhw/stdirgen/main?style=for-the-badge)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/jozhw/stdirgen/test.yml?style=for-the-badge&label=tests)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/jozhw/stdirgen/check.yml?style=for-the-badge&label=Checks)
+![GitHub all releases](https://img.shields.io/github/downloads/jozhw/stdirgen/total?style=for-the-badge)
+
 
 </div>
 
