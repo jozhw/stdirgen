@@ -6,6 +6,8 @@
 ![Codecov branch](https://img.shields.io/codecov/c/github/jozhw/stdirgen/main?style=for-the-badge)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/jozhw/stdirgen/test.yml?style=for-the-badge&label=tests)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/jozhw/stdirgen/check.yml?style=for-the-badge&label=Checks)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/jozhw/stdirgen/release.yml?style=for-the-badge&label=release)
+![GitHub release (with filter)](https://img.shields.io/github/v/release/jozhw/stdirgen?style=for-the-badge)
 ![GitHub all releases](https://img.shields.io/github/downloads/jozhw/stdirgen/total?style=for-the-badge)
 
 
