@@ -10,7 +10,6 @@
 ![GitHub release (with filter)](https://img.shields.io/github/v/release/jozhw/stdirgen?style=for-the-badge)
 ![GitHub all releases](https://img.shields.io/github/downloads/jozhw/stdirgen/total?style=for-the-badge)
 
-
 </div>
 
 <div align="center">
@@ -22,6 +21,16 @@
 ### What is Stdirgen?
 
 Stdirgen is a Rust CLI tool used to generate enumerated files or directories.
+
+### How to Install
+
+#### Macos with Homebrew
+
+```
+brew tap jozhw/stdirgen
+brew install stdirgen
+
+```
 
 ### Commands
 
