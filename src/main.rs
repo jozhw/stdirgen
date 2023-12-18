@@ -5,7 +5,7 @@ use clap::Parser;
 use stdirgen::{cli::EntityType, create_dir, create_file, create_subfiles, Cli};
 
 fn main() {
-    let cli = Cli::parse();
+    let cli: Cli = Cli::parse();
     match &cli.entity_type {
         EntityType::Directory(args) => {
             let entity_type = EntityType::Directory(args.clone());

@@ -100,15 +100,15 @@ fn test_dir_command_with_subfile() {
 
         // check if subfile exists
         for j in 0..f_length {
-            let f_name = f_names[j];
-            let f_iter = f_iters[j];
-            let f_start = f_starts[j];
-            let f_ext = f_exts[j];
+            let f_name: &str = f_names[j];
+            let f_iter: i32 = f_iters[j];
+            let f_start: i32 = f_starts[j];
+            let f_ext: &str = f_exts[j];
 
             // test if extra file
             for k in f_start..f_start + f_iter + 1 {
-                let f_enumer_name = format!("{}{}{}", &f_name, &k, &f_ext);
-                let gen_subfile_path = gen_dir_path.clone().join(&f_enumer_name);
+                let f_enumer_name: String = format!("{}{}{}", &f_name, &k, &f_ext);
+                let gen_subfile_path: PathBuf = gen_dir_path.clone().join(&f_enumer_name);
                 if k < f_start + f_iter {
                     assert!(gen_subfile_path.exists() && gen_subfile_path.is_file());
                 } else {
