@@ -43,7 +43,7 @@ impl EntityType {
     ///
     /// A PathBuf type of the path of the directory that the creation will occur in.
     pub fn get_path(&self) -> PathBuf {
-        let current_dir = env::current_dir().expect("Failed to find current directory");
+        let current_dir: PathBuf = env::current_dir().expect("Failed to find current directory");
         // control for a None object; if none then will use current dir
         match self {
             Self::Directory(args) => args.path.clone().unwrap_or(current_dir),
@@ -206,7 +206,7 @@ mod tests {
     }
     #[test]
     fn test_get_name_directory() {
-        let args = DirectoryCommand {
+        let args: DirectoryCommand = DirectoryCommand {
             name: "test_directory".to_string(),
             path: Some(PathBuf::from("/test/path")),
             iter: 10,
@@ -216,14 +216,14 @@ mod tests {
             files_start: vec![10, 20, 30],
         };
 
-        let entity_type = EntityType::Directory(args.clone());
+        let entity_type: EntityType = EntityType::Directory(args.clone());
 
         assert_eq!(entity_type.get_name(), &args.name);
     }
 
     #[test]
     fn test_get_path_directory() {
-        let args = DirectoryCommand {
+        let args: DirectoryCommand = DirectoryCommand {
             name: "test_directory".to_string(),
             path: Some(PathBuf::from("/test/path")),
             iter: 10,
@@ -233,14 +233,14 @@ mod tests {
             files_start: vec![10, 20, 30],
         };
 
-        let entity_type = EntityType::Directory(args.clone());
+        let entity_type: EntityType = EntityType::Directory(args.clone());
 
         assert_eq!(entity_type.get_path(), args.path.unwrap());
     }
 
     #[test]
     fn test_get_iter_directory() {
-        let args = DirectoryCommand {
+        let args: DirectoryCommand = DirectoryCommand {
             name: "test_directory".to_string(),
             path: Some(PathBuf::from("/test/path")),
             iter: 10,
@@ -250,14 +250,14 @@ mod tests {
             files_start: vec![10, 20, 30],
         };
 
-        let entity_type = EntityType::Directory(args.clone());
+        let entity_type: EntityType = EntityType::Directory(args.clone());
 
         assert_eq!(entity_type.get_iter(), &args.iter);
     }
 
     #[test]
     fn test_get_start_directory() {
-        let args = DirectoryCommand {
+        let args: DirectoryCommand = DirectoryCommand {
             name: "test_directory".to_string(),
             path: Some(PathBuf::from("/test/path")),
             iter: 10,
@@ -267,7 +267,7 @@ mod tests {
             files_start: vec![10, 20, 30],
         };
 
-        let entity_type = EntityType::Directory(args.clone());
+        let entity_type: EntityType = EntityType::Directory(args.clone());
 
         assert_eq!(entity_type.get_start(), &args.start);
     }
@@ -276,7 +276,7 @@ mod tests {
     fn test_get_subfile_commands_with_files() {
         // make sure that the FileCommand fails since this method is only for the DirectoryCommand
 
-        let directory_args = DirectoryCommand {
+        let directory_args: DirectoryCommand = DirectoryCommand {
             name: "test_directory".to_string(),
             path: Some(PathBuf::from("/test/path")),
             iter: 10,
@@ -290,7 +290,7 @@ mod tests {
             files_start: vec![10, 20, 30],
         };
 
-        let entity_type = EntityType::Directory(directory_args.clone());
+        let entity_type: EntityType = EntityType::Directory(directory_args.clone());
 
         if let Some(subfile_commands) = entity_type.get_subfile_commands() {
             assert_eq!(subfile_commands.files, &directory_args.files.unwrap());
@@ -303,7 +303,7 @@ mod tests {
 
     #[test]
     fn test_get_subfile_commands_without_files() {
-        let directory_args = DirectoryCommand {
+        let directory_args: DirectoryCommand = DirectoryCommand {
             name: "test_directory".to_string(),
             path: Some(PathBuf::from("/test/path")),
             iter: 10,
@@ -313,7 +313,7 @@ mod tests {
             files_start: vec![10, 20, 30],
         };
 
-        let entity_type = EntityType::Directory(directory_args.clone());
+        let entity_type: EntityType = EntityType::Directory(directory_args.clone());
 
         if entity_type.get_subfile_commands().is_none() {
             assert!(true)
@@ -324,14 +324,14 @@ mod tests {
 
     #[test]
     fn test_get_subfile_commands_files_command() {
-        let file_args = FileCommand {
+        let file_args: FileCommand = FileCommand {
             name: "test_directory".to_string(),
             path: Some(PathBuf::from("/test/path")),
             iter: 10,
             start: 5,
         };
 
-        let entity_type = EntityType::File(file_args.clone());
+        let entity_type: EntityType = EntityType::File(file_args.clone());
 
         if entity_type.get_subfile_commands().is_none() {
             assert!(true)
@@ -342,53 +342,53 @@ mod tests {
 
     #[test]
     fn test_get_name_file() {
-        let args = FileCommand {
+        let args: FileCommand = FileCommand {
             name: "test_directory".to_string(),
             path: Some(PathBuf::from("/test/path")),
             iter: 10,
             start: 5,
         };
 
-        let entity_type = EntityType::File(args.clone());
+        let entity_type: EntityType = EntityType::File(args.clone());
         assert_eq!(entity_type.get_name(), &args.name)
     }
 
     #[test]
     fn test_get_path_file() {
-        let args = FileCommand {
+        let args: FileCommand = FileCommand {
             name: "test_directory".to_string(),
             path: Some(PathBuf::from("/test/path")),
             iter: 10,
             start: 5,
         };
 
-        let entity_type = EntityType::File(args.clone());
+        let entity_type: EntityType = EntityType::File(args.clone());
         assert_eq!(entity_type.get_path(), args.path.unwrap())
     }
 
     #[test]
     fn test_get_iter_file() {
-        let args = FileCommand {
+        let args: FileCommand = FileCommand {
             name: "test_directory".to_string(),
             path: Some(PathBuf::from("/test/path")),
             iter: 10,
             start: 5,
         };
 
-        let entity_type = EntityType::File(args.clone());
+        let entity_type: EntityType = EntityType::File(args.clone());
         assert_eq!(entity_type.get_iter(), &args.iter)
     }
 
     #[test]
     fn test_get_start_file() {
-        let args = FileCommand {
+        let args: FileCommand = FileCommand {
             name: "test_directory".to_string(),
             path: Some(PathBuf::from("/test/path")),
             iter: 10,
             start: 5,
         };
 
-        let entity_type = EntityType::File(args.clone());
+        let entity_type: EntityType = EntityType::File(args.clone());
         assert_eq!(entity_type.get_start(), &args.start)
     }
 }

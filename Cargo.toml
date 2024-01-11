@@ -1,6 +1,6 @@
 [package]
 name = "stdirgen"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["J.Z.W"]
 description = "A standardized file and directory generator."
