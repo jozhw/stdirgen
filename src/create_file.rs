@@ -51,6 +51,8 @@ pub fn create_file(
                         "Error creating file '{}': {}",
                         file_name, err
                     ))));
+                } else {
+                    println!("Created file: {}", file_name)
                 }
             }
         }
