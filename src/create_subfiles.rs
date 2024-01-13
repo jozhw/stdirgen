@@ -59,6 +59,8 @@ pub fn create_subfiles(
                             "Error creating file '{}': {}",
                             file_name, err
                         ))));
+                    } else {
+                        println!("Created subfile: {}", file_name)
                     }
                 }
             }

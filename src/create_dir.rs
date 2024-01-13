@@ -44,6 +44,8 @@ pub fn create_dir(
                 "Error creating directory '{}': {}",
                 dir_name, err
             ))));
+        } else {
+            println!("Created directory: {}", dir_name)
         }
     }
     // all iterations are successful
