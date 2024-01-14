@@ -32,6 +32,18 @@ brew install stdirgen
 
 ```
 
+#### Other Operating Systems
+
+- Navigate to https://github.com/jozhw/stdirgen/releases
+- Download the most recent release that matches your operating system
+- The builds are as follows:
+  - aarch64-apple-darwin
+  - aarch64-linux-gnu
+  - universal-apple-darwin
+  - x86_64-apple-darwin
+  - x86_64-linux-gnu
+- Install the build using cargo or selected package manager
+
 ### Commands
 
 ```
